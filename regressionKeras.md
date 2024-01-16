@@ -44,8 +44,8 @@ Commencer par charger la dataset :
 iris = datasets.load_iris()
 print(iris.target)
 ```
-Vous pouvez trouver des informations concernant cette dataset ici : https://scikit-learn.org/stable/datasets/index.html#iris-dataset
-
+Vous pouvez trouver des informations concernant cette dataset ici : [https://scikit-learn.org/stable/datasets/index.html#iris-dataset
+](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html)
 **Question : analyser la structure des données. Combien d'échantillons ? Combien de paramètres ?**
 
 Pour produire un modèle et le tester sur les données, il faut transformer l'objet iris en numpy array. Attention, cette base de données comporte 
