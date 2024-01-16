@@ -153,9 +153,11 @@ Par ailleurs, la sortie du réseau est une valeur entre 0 et 1. Par conséquent,
 predictions = (model.predict(X) > 0.5).astype(int)
 ```
 
-**Question : modifier la structure du réseau en ajoutant une couche dense cachée de 2, 4, 8, 16 et 32 neurones. Lancer à nouveau l'apprentissage.**
-**Question : modifier la structure du réseau en ajoutant deux couches dense cachées de respectivement 32 et 64 neurones. Lancer à nouveau l'apprentissage.**
-**Question : que constater vous sur la durée de l'apprentissage, sur la valeur de loss et sur l'accuracy ?**
+**Question : modifier la structure du réseau en ajoutant une couche dense cachée de 2, 4, 8, 16 et 32 neurones. Sur cette couche vous utiliserez la fonction d'activation sigmoid puis Relu. Lancer à nouveau l'apprentissage.**
+
+**Question : modifier la structure du réseau en ajoutant deux couches dense cachées de respectivement 32 et 64 neurones. Sur cette couche vous utiliserez la fonction d'activation sigmoid puis Relu. Lancer à nouveau l'apprentissage.**
+
+**Question : que constater vous sur la durée de l'apprentissage, sur la valeur de loss et sur l'accuracy en opérant toutes les combinaisons relatives aux questions précédentes?**
 
 # Second projet - application du précédent projet à un autre dataset
 
