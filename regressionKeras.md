@@ -79,15 +79,14 @@ Les couches entièrement connectées sont définies à l’aide de la classe __D
 Autrefois, les fonctions d'activation Sigmoïde et Tanh étaient préférées pour toutes les couches. De nos jours, de meilleures performances sont obtenues grâce à la fonction d'activation ReLU. L'utilisation d'un sigmoïde sur la couche de sortie garantit que la sortie de votre réseau est comprise entre 0 et 1 et qu'elle est facile à mapper soit à une probabilité de classe 1, soit à une classification stricte de l'une ou l'autre classe avec un seuil par défaut de 0,5.
 
 ```
-# define the keras model
 model = Sequential()
 
-# Pour iris
 model.add(Dense(1, input_shape=(4,),activation='sigmoid'))
 model.summary()
 ```
 
-## Compilation du modèle
+## Compilation du modèle
+
 
 Maintenant que le modèle est défini, vous pouvez le compiler.
 
