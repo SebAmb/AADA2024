@@ -153,10 +153,22 @@ Par ailleurs, la sortie du réseau est une valeur entre 0 et 1. Par conséquent,
 predictions = (model.predict(X) > 0.5).astype(int)
 ```
 
+**Question : modifier la structure du réseau en ajoutant une couche dense cachée de 2, 4, 8, 16 et 32 neurones. Lancer à nouveau l'apprentissage.**
+**Question : modifier la structure du réseau en ajoutant deux couches dense cachées de respectivement 32 et 64 neurones. Lancer à nouveau l'apprentissage.**
+**Question : que constater vous sur la durée de l'apprentissage, sur la valeur de loss et sur l'accuracy ?**
 
 # Second projet - application du précédent projet à un autre dataset
 
+Modifier l'ensemble du script précédent en l'appliquant aux données contenues dans le fichier dataset_diabets.csv.
+Pour cela vous utiliserez la fonction ```dataset = loadtxt('dataset_diabets.csv', delimiter=',')```
 
+Il s'agit d'un ensemble de données d'apprentissage automatique standard du référentiel UCI Machine Learning. Il décrit les données du dossier médical des Indiens Pima et indique s'ils ont présenté ou non un diabète dans les cinq ans en fonction de certains paramètres. L'objectif est de définir un modèle capable de prédire l'état d'un patient en fonction des valeurs d'un certain nombre de paramètres.
 
-Vous allez charger les données contenues dans le fichier dataset_diabets.csv
+Les informations sur cette base sont dans le fichier dataset_diabets.txt de ce dépot.
+
+Il vous faudra bien contrôler le nombre de paramètres de chaque échantillon pour définir la dimension de la couche d'entrée du réseau.
+Commencer par définir un réseau sans couche cachée. Puis opérer de la même manière que précédemment en ajoutant plusiers couches cachées et en modifiant leur nombre de neurones.
+
+**Question : que constatez-vous sur la durée, l'évolution de la fonction de loss et l'accuracy ?**
+
 
