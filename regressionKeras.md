@@ -4,13 +4,13 @@ Nous nous plaçons dans le cadre d'une régression logistique donc dans le cas d
 
 Les étapes que vous apprendrez dans ce TP sont les suivantes :
   
-  Charger des données
-  Définir le modèle Keras
-  Compiler le modèle Keras
-  Compatible avec le modèle Keras.
-  Évaluer le modèle Keras
-  Attachez le tout ensemble
-  Faire des prédictions
+  1. Charger des données
+  2. Définir le modèle Keras
+  3. Compiler le modèle Keras
+  4. Compatible avec le modèle Keras.
+  5. Évaluer le modèle Keras
+  6. Attachez le tout ensemble
+  7. Faire des prédictions
 
 Vous utiliserez l'environnement Colab Research de Google: https://colab.research.google.com
 
