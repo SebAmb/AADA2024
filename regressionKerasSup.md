@@ -17,7 +17,7 @@ pour faire un script complet d'un classifieur MLP binaire dans lequel vous assur
 3. Lancement de l'entrainement
 4. Evaluation du modèle obtenu
 
-## 
+## Spécification de la base de validation
 
 Durant l'apprentissage, les données de la base sont présentées au réseau un nombre __n__ de fois (__n__ epochs). La base est découpée en plusieurs
 batchs, chaque batch contenant un nombre __m__ d'échantillons. Par conséquent, pour une base d'apprentissage de __L__ échantillons
@@ -45,7 +45,7 @@ history=model.fit(X, y, epochs=500, batch_size=10, shuffle=False, validation_spl
 ```
 La sortie précise alors les valeus de loss et d'accuracy pour la base d'apprentissage restante (i.e. 80%) et la base de validation. Rappelons que seule les 80% servent à
 mettre à jour directement ls poids du réseau. La base de validation est utilisée pour qualifier le pouvoir de généralisation du réseau. Cette qualification s'effectue 
-à chaque epoch. La sortie de obtenue est la suivante :
+à chaque epoch grâce aux 4 valeurs loss, accuracy, val_loss et val_accuracy. La sortie obtenue est la suivante :
 ```
 
 Epoch 5/500
@@ -53,6 +53,79 @@ Epoch 5/500
 Epoch 6/500
 12/12 [==============================] - 0s 5ms/step - loss: 0.0327 - accuracy: 0.9917 - val_loss: 0.3862 - val_accuracy: 0.7667
 ```
+
+_Méthode 2_ : il suffit de créer un sous-ensemble de données de validation à partir de la base d'apprentissage et de le passer à la méthode fit() du modèle.
+Pour cela nous allons utiliser la librairie sklearn et la fonction train_test_split() au travers des lignes de code suivantes :
+```
+# Création des sous ensemble de validation
+from sklearn.model_selection import train_test_split
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=2)
+```
+Dans cet exemple, nous créons les deux sous-ensembles X_train et X_val et leurs labels respectifs y_train et y_val. Les échantillons de la base de validation X_val représentent 20% de la base d'apprentissage initiale X. L'extraction est réalisée de manière aléatoire en précisant le seed du générateur de nombres pseudo-aléatoires (random_state=2).En changeant cette valeur, vous obtiendrez des sous-ensembles différents.
+
+## Affichage des courbes d'apprentissage
+
+Voici quelques lignes pour tracer la valeur de loss, accuracy, val_loss et val_accuracy obtenues à chaque époch.
+Pour cela, nous devons récupérer ce qui est retourné par la méthode fit().
+```
+...
+history=mpodel.fit(...)
+...
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['loss'], label = 'loss')
+plt.plot(history.history['val_accuracy'], label='val accuracy')
+plt.plot(history.history['val_loss'], label = 'val loss')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy/Loss')
+plt.ylim([0, 1])
+plt.legend(loc='lower right')
+```
+
+**Question : Afficher les courbes pour l'architectures MLP à deux couches cachées dont vous modifierez le nombre de neurones selon les configirations suivantes : (64,32) (32,16)(16,8)(8,4).
+A partir de ces 4 courbes, il est alors possible de constater ou non l'apparition ou non d'un surapprenissage (overfitting). Un surapprentissage est le résultat d'une inadéquation entre le nombre de poids 
+du réseau et le nombre d'instance de la base d'apprentissage. Une fois vos 4 courbes disponibles, appelez-moi pour une explication.**
+
+## Enregistrement/chargement des poids du réseau appris
+
+Une fois la phase d'entraînement terminée, il est possible d'enregistrer les poids du réseau et son architecture grâce à ```model.save("regressionML.keras")```. Cette fonction sauvegarde l'architecture du réseau et les poids du réseau obtenus à la toute dernière itération dans un fichier compressé. Il est possible de ne sauvegarder que les poids ```model.save_weights("regressionMLP.weights.h5")``` dans un fichier au format .h5.
+
+Une fois les sauvegardes effectuées, il est alors possible de charger à nouveau les réseaux pour réaliser d'autres inférences, sur d'autres plateformes et d'autres données. Le fichier .keras permet, en le chargeant, de décrire à la fois l'architecture et les poids. le fichier .h5  permet de ne charger que les poids et nécessite donc de décrire préalablement et manuellement l'architecture du réseau comme vouz l'avez fait jusque là. 
+
+```
+# Charger un modèle
+restored_model = keras.models.load_model("regressionMLP.keras")
+
+ou
+
+# Charger les poids d'un modèle
+# Description du réseau
+model = Sequential()
+model.add(Dense(128, input_shape=(4,), activation='relu'))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+model.load_weights("regressionMLP.weights.h5")
+```
+Ainsi, il est possible d'inférer le réseau chargé sur de nouvelles données de la manière suivante :
+```
+# Prédiction sur le sous-ensemble d'apprentissage
+res=model.predict(X_train)
+res2=restored_model.predict(X_train)
+
+# Prédiction sur deux nouvelles instances X_1 et X_2
+X_1=[5.8,2.6,4.0,1.2]
+X_2=[6.3,3.3,6.0,2.5]
+res1=model.predict([X_1])
+res2=model.predict([X_2])
+print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
+```
+
+## Sauvegarde des poids durant l'apprentissage
+
+Il est possible de sauvegarder les poids du réseau durant l'apprentissage
+
+
+
+
 
 
 
