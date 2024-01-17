@@ -163,13 +163,14 @@ predictions = (model.predict(X) > 0.5).astype(int)
 Modifier l'ensemble du script précédent en l'appliquant aux données contenues dans le fichier dataset_diabets.csv.
 Pour cela vous utiliserez la fonction ```dataset = loadtxt('dataset_diabets.csv', delimiter=',')```
 
-Il s'agit d'un ensemble de données d'apprentissage automatique standard du référentiel UCI Machine Learning. Il décrit les données du dossier médical des Indiens Pima et indique s'ils ont présenté ou non un diabète dans les cinq ans en fonction de certains paramètres. L'objectif est de définir un modèle capable de prédire l'état d'un patient en fonction des valeurs d'un certain nombre de paramètres.
+Il s'agit d'un ensemble de données d'apprentissage automatique standard du référentiel UCI Machine Learning. Il décrit les données du dossier médical des Indiens Pima et indique s'ils ont présenté ou non un diabète dans les cinq ans en fonction de certains paramètres. L'objectif est de définir un modèle capable de prédire l'état d'un patient en fonction des valeurs de ces paramètres.
 
-Les informations sur cette base sont dans le fichier dataset_diabets.txt de ce dépot.
+Les informations sur cette base sont dans le fichier dataset_diabets.txt de ce dépot qu'il faudra donc chargé sur votre drive.
 
 Il vous faudra bien contrôler le nombre de paramètres de chaque échantillon pour définir la dimension de la couche d'entrée du réseau.
 Commencer par définir un réseau sans couche cachée. Puis opérer de la même manière que précédemment en ajoutant plusiers couches cachées et en modifiant leur nombre de neurones.
 
-**Question : que constatez-vous sur la durée, l'évolution de la fonction de loss et l'accuracy ?**
+**Question : identique au projet précédent ... que constatez-vous sur la durée, l'évolution de la fonction de loss et l'accuracy ?**
+
 
 
