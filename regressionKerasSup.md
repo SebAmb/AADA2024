@@ -121,8 +121,27 @@ print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
 
 ## Sauvegarde des poids durant l'apprentissage
 
-Il est possible de sauvegarder les poids du réseau durant l'apprentissage
+Il est possible de sauvegarder les poids du réseau durant l'apprentissage. Pour cela, nous devons créer une fonction callback qui sera appelée par la fonction .fit()
+Il est possible de sauvegarder les poids estimés à la fin de chaque epoch (https://keras.io/api/callbacks/model_checkpoint/)
+Toutefois, pour éconoimser de l'espace mémoire (tout particulièrement pour les gros réseaux) il est possible de sauvegarder les poids du réseau sous conditions. Par exemple, nous
+choisirons de sauvegarder uniquement si la valeur de val_loss est plus faible que la valeur obtenue à l'epoch précédente.
 
+```
+# construction de la fonction callback qui sauvegarde les poids
+# seulement si le modèle est meilleur sur la base de val_loss
+checkpoint = keras.callbacks.ModelCheckpoint(filepath="./weights/weights-{epoch:03d}-{val_loss:.4f}.hdf5", monitor="val_loss", mode="min", save_best_only=True, verbose=1)
+callbacks = [checkpoint]
+
+# appel de la nouvelle fonction de fit()
+history=model.fit(X, y, epochs=200, batch_size=10, shuffle=False, validation_split=0.2, callbacks=callbacks, verbose=2)
+```
+
+Il est possible de changer la valeur qui est monitorée pour créer la condition de sauvegarde : ```fit(...,monitor=val_accuracy,mode="max",verbose=1)```
+
+**Question : vérifier la bonne sauvegarde des poids dans le dossier que vous avez préciseé (ici ./weights/weights-032-0.4321.hdf5)**
+
+**Question : une fois l'entraînement terminé, charger le dernier fichier de poids sauvegardé avec la callback et inférer ce réseau sur la base X_train afin d'en calculer la précision
+comme vous l'avez fait dans le sujet précédent**
 
 
 
