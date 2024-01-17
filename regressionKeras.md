@@ -123,7 +123,6 @@ Le processus de formation s'exécutera pendant un nombre fixe d'epoch (et d'ité
 
 ```
 model.fit(X, y, epochs=150, batch_size=10)
-
 ```
 
 ## Evaluation du modèle
@@ -147,7 +146,7 @@ Les réseaux de neurones sont des algorithmes stochastiques, ce qui signifie que
 
 La variance des performances du modèle signifie que pour obtenir une approximation raisonnable des performances de votre modèle, vous devrez peut-être l'ajuster plusieurs fois et calculer la moyenne des scores de précision : https://machinelearningmastery.com/evaluate-skill-deep-learning-models/
 
-**Question : exécuterl'apprentissage plusieurs fois et noter l'accuracy à chaque fois. Que constatez vous ?**
+**Question : exécuter l'apprentissage plusieurs fois et noter l'accuracy à chaque fois. Que constatez vous ?**
 
 Par ailleurs, la sortie du réseau est une valeur entre 0 et 1. Par conséquent, nous pouvons décider que la règle de décision utilisera un seuil de 0.5 et que si le score est inférieur à 0.5 alors la prédiction doit être 0 et 1 sinon : 
 
