@@ -206,7 +206,7 @@ Dans ce dernier exercice, nous allons repasser la dataset Iris à 3 classes et e
 
 Pour cela vous allez devoir faire les modifications suivante.
 1. La dernière couche dense du modèle doit être composée de 3 neuones : chaque neurone prendra la valeur 1 pour la classe correspondance (100 - 010 - 001).
-2. Changer le format des labels y : chaque label sera codé avec un tableau de 3 valeurs et la nouvelle variable des label sera appelée y_cat
+2. Changer le format des labels y : chaque label sera codé avec un tableau de 3 valeurs et la nouvelle variable des labels sera appelée ```y_cat = keras.utils.to_categorical(y, 3)```
 3. Changer la fonction de loss du model.compile(...) : loss="categorical_crossentropy"
 4. Après l'entraînement sur l'ensemble des échantillons X (avec label y_cat), lancer une évaluation du modèle sur ce même ensemble et calculer sa précision.
 
