@@ -162,7 +162,7 @@ history=model.fit(X_train_scaled, y_train, epochs=350, batch_size=10, shuffle=Fa
 ```
 
 Le modèle ainsi appris n'est alors inférable que sur des nouvelles données qui ont été standardisées également avec les mêmes transformations (moyenne et variance). En reprenant
-les lignes de code précédentes :
+les lignes de code précédentes et en considérant que l'objet scaler est encore disponible :
 
 ```
 X_1=scaler.transform(np.array([[5.8,2.6,4.0,1.2]]))
@@ -172,6 +172,18 @@ res2=model.predict([X_2])
 print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
 ```
 
+Dans la plupart des cas, vous aurez entrainé le réseau sur une base d'apprentissage que vous aurez standardisée et vous aurez sauvegardé la valeur de la moyenne et de la variance de la transformation qui vous aura servi à standardiser les données d'apprentissage. Ces deux paramètres vous servirons alors à transformer les nouvelles données sur lesquelles vous souhaiteriez inférer le réseau :
+
+```
+std  = np.sqrt(scaler.var_)
+mean = scaler.mean_
+X=np.array([[6.3,3.3,6.0,2.5]])
+X_1_scaled = (X_1 - mean)) / std
+
+res1=model.predict([X_1_scaled])
+print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
+
+```
 
 
 
