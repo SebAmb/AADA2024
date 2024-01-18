@@ -143,6 +143,37 @@ Il est possible de changer la valeur qui est monitorée pour créer la condition
 **Question : une fois l'entraînement terminé, charger le dernier fichier de poids sauvegardé avec la callback et inférer ce réseau sur la base X_train afin d'en calculer la précision
 comme vous l'avez fait dans le sujet précédent**
 
+## Standardisation des données
+
+L'échelle et la dynamique des données d'apprentissage seront probablement très variables. Par conséquent une étape de standardisation des données est requise afin de réduire l'effet de 
+cette variabilité sur l'entraînement. Nous la réalisons avec la bibliothèque sklearn et la fonction StandardScaler(). La standardisation permet de recentrer les données et de ramener la variance des données
+à 1.
+
+```
+from sklearn.preprocessing import StandardScaler
+
+# en reprenant les X_train, X_val, y_train, y_val précédents
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_val_scaled = scaler.fit_transform(X_val)
+
+# entraînement sur le dataset standardisé
+history=model.fit(X_train_scaled, y_train, epochs=350, batch_size=10, shuffle=False, validation_data=(X_val_scaled,y_val), callbacks=callbacks)
+```
+
+Le modèle ainsi appris n'est alors inférable que sur des nouvelles données qui ont été standardisées également avec les mêmes transformations (moyenne et variance). En reprenant
+les lignes de code précédentes :
+
+```
+X_1=scaler.transform(np.array([[5.8,2.6,4.0,1.2]]))
+X_2=scaler.transform(np.array([[6.3,3.3,6.0,2.5]]))
+res1=model.predict([X_1])
+res2=model.predict([X_2])
+print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
+```
+
+
+
 
 
 
