@@ -222,6 +222,23 @@ for i in range(150):
     print(X[i],"-",predictions[i],"-", y_cat[i])
 ```
 
+## Passage à la dataset MNIST
+
+Cette dataset contient 10 classes, chacune correspondant à un chifre manuscrit.
+Appliquer le réseau MLP multi-classes précédent à cette dataset.
+
+Pour charger la dataset : 
+
+```
+import tf.keras.datasets.mnist as mnist
+
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+```
+
+Ici les images sont normalisées en divisant par 255, de manière similaire à ce que nous avons fait sur les données Iris en les standardisant.
+
 
 
 
