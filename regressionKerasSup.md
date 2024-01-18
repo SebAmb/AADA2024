@@ -7,7 +7,6 @@ Dans ce sujet, nous allons étudier quelques spécificités de Keras et notammen
 3. Tester différents algorithmes d'apprentissage
 4. Enregistrer/charger les poids et l'architrcture du réseau
 5. Optimisation des données d'apprentissage
-6. Outil Tensorboard
 
 Pour cela vous reprendrez les lignes de code que vous avez développés dans le sujet précédent
 pour faire un script complet d'un classifieur MLP binaire dans lequel vous assurerez les étapes suivantes :
@@ -84,6 +83,20 @@ plt.legend(loc='lower right')
 **Question : Afficher les courbes pour l'architectures MLP à deux couches cachées dont vous modifierez le nombre de neurones selon les configirations suivantes : (64,32) (32,16)(16,8)(8,4).
 A partir de ces 4 courbes, il est alors possible de constater ou non l'apparition ou non d'un surapprenissage (overfitting). Un surapprentissage est le résultat d'une inadéquation entre le nombre de poids 
 du réseau et le nombre d'instance de la base d'apprentissage. Une fois vos 4 courbes disponibles, appelez-moi pour une explication.**
+
+## Tester plusieurs algorithmes d'apprentissage
+
+Test votre réseau en fonction de l'algo d'optimisation utilisé   : SGD, RMSprop, Adam, AdamW, Adagrad
+
+Faite également varier le __learning_rate__ qui qui joue sur la rapidité de la descente de gradient. C'est un paramètre qui peut poser de gros problème : nous allons être face à une oscillation des performance ou tomber dans un minimum local. Par défaut la valeur du learning_rate est 0.001. Voici un exemple dans le cas d'Adam :
+
+```
+opt = keras.optimizers.Adam(learning_rate=0.01)
+model.compile(loss='binary_crossentropy', optimizer=opt)
+```
+
+**Question : analyser l'accuracy pour plusieurs valeurs de learning_rate et pour plusieurs algo d'apprentissage**
+
 
 ## Enregistrement/chargement des poids du réseau appris
 
