@@ -224,24 +224,42 @@ for i in range(150):
 
 ## Passage à la dataset MNIST
 
-Cette dataset contient 10 classes, chacune correspondant à un chifre manuscrit.
+Cette dataset contient 10 classes, chacune correspondant à un chiffre manuscrit.
 Appliquer le réseau MLP multi-classes précédent à cette dataset.
 
 Pour charger la dataset : 
-
 ```
 import tf.keras.datasets.mnist as mnist
 
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
+```
+Ici les images sont normalisées en divisant par 255, de manière similaire à la standardisation que nous avons appliquée aux données Iris.
+
+Attention, vous avez ici une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test).
+Seule la base X_train devra être utilisée pour l'entrainement. Donc vous devrez en extraire une base de validation (X_val, y_val)
+que vous poasserez à la fonction .fit().
+
+Notons que les images sont des données en 2D de dimension 28x28.
+Or l'entrée de notre MLP doit être 1D. Par conséquent, nous allons "applatir" les images de la base d'apprentissage. Pour cela nous
+allons ajouter une couche __flatten__ de la manière suivante :
+```
+model = Sequential()
+model.add(Flatten(input_shape=(28, 28)))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
+model.add(Dense(10, activation='softmax'))
+model.summary()
 
 ```
+**Question : Afficher les courbes d'apprentissage sur les configurations du MLP suivantes (256,128) (128,64) (64,32) (32,16)**
 
-Ici les images sont normalisées en divisant par 255, de manière similaire à ce que nous avons fait sur les données Iris en les standardisant.
+**Question : A l'issue de l'entrainement et en analysant les courbes d'apprentissage, vous choisirez ce qui vous semble être le meilleur réseau
+(composé des meilleurs poids) et vous l'évaluerez sur la base de test (X_test, y_test) en calculant son accuracy.**
 
-
-
-
+**Question : Finalement vous produirez plusieurs images de chiffre de votre plus belle écriture (ou non) sur lesquelles vous inférerez
+le réseau que vous aurez retenu. Ainsi, vous vérifierez qu'il prédit correctement les chiffres que vous aurez écrits. Attention, les chiffres devront être
+blancs sur fond noir et vous devrez normaliser vos images (/255).**
 
 
 
