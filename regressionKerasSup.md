@@ -185,6 +185,30 @@ print('classe {0} and classe {1}'.format(round(res1[0,0]),round(res2[0,0])))
 
 ```
 
+## Passage au cas multi classes
+
+Dans ce dernier exercice, nous allons repasser la dataset Iris à 3 classes et entrainer une nouvelle architecture MLP.
+
+Pour cela vous allez devoir faire les modifications suivante.
+1. La dernière couche dense du modèle doit être composée de 3 neuones : chaque neurone prendra la valeur 1 pour la classe correspondance (100 - 010 - 001).
+2. Changer le format des labels y : chaque label sera codé avec un tableau de 3 valeurs et la nouvelle variable des label sera appelée y_cat
+3. Changer la fonction de loss du model.compile(...) : loss="categorical_crossentropy"
+4. Après l'entraînement sur l'ensemble des échantillons X (avec label y_cat), lancer une évaluation du modèle sur ce même ensemble et calculer sa précision.
+
+Pour terminer, vous afficherez pour chaque échantillon, la prédiction du modèle et le label attendu : 
+
+```
+# Calculer la prédiction de la classe pour tous les échantillons
+predictions = (model.predict(X) > 0.5).astype(int)
+
+# Afficher les prédictions et les labels
+for i in range(150):
+  if (np.abs((predictions[i]-y_cat[i])).sum())!=0:
+    print(X[i],"-",predictions[i],"-", y_cat[i])
+```
+
+
+
 
 
 
