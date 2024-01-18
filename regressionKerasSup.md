@@ -222,7 +222,7 @@ for i in range(150):
     print(X[i],"-",predictions[i],"-", y_cat[i])
 ```
 
-## Passage à la dataset MNIST
+## Passage à la dataset MNIST
 
 Cette dataset contient 10 classes, chacune correspondant à un chiffre manuscrit.
 Appliquer le réseau MLP multi-classes précédent à cette dataset.
