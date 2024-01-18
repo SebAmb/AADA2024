@@ -84,6 +84,8 @@ plt.legend(loc='lower right')
 A partir de ces 4 courbes, il est alors possible de constater ou non l'apparition ou non d'un surapprenissage (overfitting). Un surapprentissage est le résultat d'une inadéquation entre le nombre de poids 
 du réseau et le nombre d'instance de la base d'apprentissage. Une fois vos 4 courbes disponibles, appelez-moi pour une explication.**
 
+**Question : tracer ces courbes pour le MLP à deux couches cachées (32,16) et une taille de batch de 1. Que constatez vous ?**
+
 ## Tester plusieurs algorithmes d'apprentissage
 
 Test votre réseau en fonction de l'algo d'optimisation utilisé   : SGD, RMSprop, Adam, AdamW, Adagrad
