@@ -73,7 +73,12 @@ La phase d'entraînement va permettre de déterminer la valeur de ces paramètre
 
 L'objectif est de déterminer les poids du modèle.
 
-**Question : sur la base de ce que vous avez fait dans le TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissag et pour lancer le fitting du modèle.**
+**Question : sur la base de ce que vous avez fait à la fin du TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissage et pour lancer le fitting du modèle.**
+
+Attention, vous avez ici une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test). Seule la base X_train devra être utilisée pour l'entrainement. Donc vous devrez en extraire une base de validation (X_val, y_val) que vous poasserez à la fonction .fit().
+Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de loss __CategoricalCrossentropy__ : donc vous auez besoin de transformer les labels des échantillons de la bass d'apprentissage et de la base de test.
+
+
 
 
 
