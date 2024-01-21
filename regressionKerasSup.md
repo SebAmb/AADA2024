@@ -261,6 +261,31 @@ model.summary()
 le réseau que vous aurez retenu. Ainsi, vous vérifierez qu'il prédit correctement les chiffres que vous aurez écrits. Attention, les chiffres devront être
 blancs sur fond noir et vous devrez normaliser vos images (/255).**
 
+Pour cette dernière question, il faut veiller à bien ecapsuler l'image sur laquelle vous souhaitez inférer le réseau. Ainsi vous pourrez commencer par inférer sur 
+une image de la base de test de la manière suivante :
+```
+from keras.preprocessing.image import img_to_array
+from numpy import argmax
+
+# l'image est transformée en tableau
+img=img_to_array(x_test[10])
+
+# le tableau est transformée en tableau de tableaux (un tableau d'images)
+img=img.reshape(1,28,28)
+
+# prédiction du modèle sur img
+res=model.predict(img)
+# affichage de la prédiction 
+print(res)
+
+# le nombre inscrit correspond à la classe pour laquelle la valeur est maximale : utlisation de la fonction argmax 
+digit = argmax(res)
+
+# affichage de la réponse et de la bonne réponse
+print("la prédiction est ",digit)
+print("le label de l'image est ",y_test[10])
+
+```
 
 
 
