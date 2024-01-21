@@ -76,8 +76,22 @@ L'objectif est de déterminer les poids du modèle.
 **Question : sur la base de ce que vous avez fait à la fin du TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissage et pour lancer le fitting du modèle.**
 
 Attention, vous avez ici une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test). Seule la base X_train devra être utilisée pour l'entrainement. Donc vous devrez en extraire une base de validation (X_val, y_val) que vous poasserez à la fonction .fit().
-Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de loss __CategoricalCrossentropy__ : donc vous auez besoin de transformer les labels des échantillons de la bass d'apprentissage et de la base de test.
+Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de loss __CategoricalCrossentropy__ : donc vous auez besoin de transformer les labels des échantillons de la base d'apprentissage et de la base de test.
 
+## Evaluation et prédiction
+
+**Question : évaluer le modèle obtenu sur la base de test complète et calculer l'accuracy.**
+
+**Question : retrover les images de la base de test sur lesquelles le modèle fait de mauvaises prédictions.**
+
+## Complexification du modèle
+
+**Question : définir un CNN dont la composition est la suivante :
+couche CNN_1 : 64 filtres 
+couche CNN_2 : 32 filtres
+couche CNN_3 : 16 filtres
+couche FC cachée : 64 neurones
+couche de sortie : 10 neurones**
 
 
 
