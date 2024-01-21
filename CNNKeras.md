@@ -73,7 +73,7 @@ La phase d'entraînement va permettre de déterminer la valeur de ces paramètre
 
 L'objectif est de déterminer les poids du modèle.
 
-**Question : sur la base de ce que vous avez fait à la fin du TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissage et pour lancer le fitting du modèle.**
+**Question : sur la base de ce que vous avez fait à la fin du TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissage et pour lancer le fitting du modèle sur 10 epochs.**
 
 Attention, vous avez ici une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test). Seule la base X_train devra être utilisée pour l'entrainement. Donc vous devrez en extraire une base de validation (X_val, y_val) que vous poasserez à la fonction .fit().
 Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de loss __CategoricalCrossentropy__ : donc vous auez besoin de transformer les labels des échantillons de la base d'apprentissage et de la base de test.
@@ -86,12 +86,62 @@ Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de los
 
 ## Complexification du modèle
 
-**Question : définir un CNN dont la composition est la suivante :
-couche CNN_1 : 64 filtres 
-couche CNN_2 : 32 filtres
-couche CNN_3 : 16 filtres
+A partir de cette partie lancer un environnement colab avec GPU.
+
+**Question : définir un CNN dont la composition est la suivante et donner son nombre de paramètres :**
+```
+couche CNN_1 : 32 filtres avec stride=(1,1) et padding='same'
+couche CNN_2 : 16 filtres avec stride=(1,1) et padding='same'
+couche CNN_3 : 8 filtres avec stride=(1,1) et padding='same'
+et
 couche FC cachée : 64 neurones
 couche de sortie : 10 neurones**
+```
+**Question : lancer son entraînement sur la base d'entrainement sur 10 épochs, des match de 32 images et un split de 20% pour la base d'évaluation.**
+
+**Question : evaluer ce modèle sur la base de test.**
+
+# Application d'un CNN à un jeu d'images en couleur
+
+Nous allons désormais définir un CNN capable d'opérer une tâche de classificaiton d'images en couleur.
+Pour cela nous allons utiliser la base d'images CIFAR-10. Cet ensemble CIFAR-10 contient 60 000 images couleur de dimension 32 X 32 en 3 canaux répartis en 10 classes. Les données d'entraînement contiennent 50 000 images et les données de test 10 000. (https://www.cs.toronto.edu/~kriz/cifar.html). Il s'agit d'un problème multiclasses avec 10 étiquettes. Les données sont réparties également entre les étiquettes.
+Les étiquettes sont les suivantes :
+```
+class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
+               'dog', 'frog', 'horse', 'ship', 'truck']
+```
+
+Le chargement et la normalisation des images s'effectue de la même manière que pour MNIST :
+
+```
+(x_train, y_train), (x_test, y_test) = datasets.cifar10.load_data()
+
+# Normalisation des valeurs RGBdes pixels
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+```
+
+**Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Vous utilisrez Adam, fixerez le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évalution sur la base de test. Voici l'architecture :**
+
+```
+couche CNN_1 : 256 filtres avec stride=(1,1) et padding='same'
+couche CNN_2 : 128 filtres avec stride=(1,1) et padding='same'
+couche CNN_3 : 64 filtres avec stride=(1,1) et padding='same'
+couche CNN_3 : 32 filtres avec stride=(1,1) et padding='same'
+
+et
+
+couche FC cachée : 64 neurones
+couche de sortie : 10 neurones
+```
+**Question : en analysant les courbes que constatez-vous ?**
+
+Nous allons tenter de remédier à ce problème des deux manières suivantes :
+1. en augmentant le nombre de données (data augmentation)
+2. en ajoutant des couches de __dropout__
+
+
+
 
 
 
