@@ -31,7 +31,7 @@ for i in range(25):
 plt.show()
 ```
 
-**Question : faites de même avec l'ensemble des images de tests**
+**Question : faire de même avec l'ensemble des images de tests**
 
 ## Spécification du modèle convolutif
 
