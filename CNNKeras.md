@@ -67,35 +67,39 @@ La valeurs des filtres sont initialisées de manière aléatoire. La phase d'ent
 
 ## Entraînement du modèle
 
-L'objectif est de déterminer les poids du modèle.
+L'objectif est de déterminer les poids du modèle i.e. les valeurs des filtres et les poids de la partie totalement connectée.
 
 **Question : sur la base de ce que vous avez fait à la fin du TP précédent, écrire les lignes de code pour définir les paramètres de l'apprentissage et pour lancer le fitting du modèle sur 10 epochs.**
 
-Attention, vous avez ici une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test). Seule la base X_train devra être utilisée pour l'entrainement. Donc vous devrez en extraire une base de validation (X_val, y_val) que vous poasserez à la fonction .fit().
-Toujours comme dans la fin du TP précédent, vous utiliserez la fonction de loss __CategoricalCrossentropy__ : donc vous auez besoin de transformer les labels des échantillons de la base d'apprentissage et de la base de test.
+Attention, nous avons une base d'apprentissage (X_train, y_train) et une base de test (X_test,y_test). Seule la base X_train devra être utilisée pour l'entraînement. Donc nous devons en extraire une base de validation (X_val, y_val) que nous poasserons à la fonction ```model.fit()```.
+Toujours comme dans la fin du TP précédent, nous utiliserons la fonction de loss __CategoricalCrossentropy__ : nous aurons besoin de transformer les labels des échantillons de la base d'apprentissage et de la base de test comme nous l'avons déjà fait dans le sujet précédent.
 
 ## Evaluation et prédiction
 
 **Question : évaluer le modèle obtenu sur la base de test complète et calculer l'accuracy.**
 
-**Question : retrover les images de la base de test sur lesquelles le modèle fait de mauvaises prédictions.**
+**Question : retrouver les images de la base de test sur lesquelles le modèle fait de mauvaises prédictions.**
 
 ## Complexification du modèle
 
-A partir de cette partie lancer un environnement colab avec GPU.
+A partir de cette partie lancer un environnement colab avec GPU car les modèles comporteront plus de paramètres estimés.
 
 **Question : définir un CNN dont la composition est la suivante et donner son nombre de paramètres :**
+
 ```
 couche CNN_1 : 32 filtres avec stride=(1,1) et padding='same'
 couche CNN_2 : 16 filtres avec stride=(1,1) et padding='same'
 couche CNN_3 : 8 filtres avec stride=(1,1) et padding='same'
+
 et
+
 couche FC cachée : 64 neurones
 couche de sortie : 10 neurones**
 ```
-**Question : lancer son entraînement sur la base d'entrainement sur 10 épochs, des match de 32 images et un split de 20% pour la base d'évaluation.**
+**Question : lancer son entraînement sur la base d'entrainement sur 10 épochs, des batchs de 32 images et un split de 20% pour la base d'évaluation.**
 
-**Question : evaluer ce modèle sur la base de test.**
+**Question : evaluer ce modèle sur la base de test et calculer la valeur d'accuracy.**
+
 
 # Application d'un CNN à un jeu d'images en couleur
 
