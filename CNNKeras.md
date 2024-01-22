@@ -103,9 +103,8 @@ couche de sortie : 10 neurones**
 
 # Application d'un CNN à un jeu d'images en couleur
 
-Nous allons désormais définir un CNN capable d'opérer une tâche de classificaiton d'images en couleur.
-Pour cela nous allons utiliser la base d'images CIFAR-10. Cet ensemble CIFAR-10 contient 60 000 images couleur de dimension 32 X 32 en 3 canaux répartis en 10 classes. Les données d'entraînement contiennent 50 000 images et les données de test 10 000. (https://www.cs.toronto.edu/~kriz/cifar.html). Il s'agit d'un problème multiclasses avec 10 étiquettes. Les données sont réparties également entre les étiquettes.
-Les étiquettes sont les suivantes :
+Nous allons désormais définir un CNN capable d'opérer une tâche de classification d'images en couleur.
+Pour cela nous allons utiliser la base d'images CIFAR-10. Cet ensemble CIFAR-10 contient 60 000 images couleur de dimension 32 X 32 en 3 canaux répartis en 10 classes. Les données d'entraînement contiennent 50 000 images et les données de test 10 000. (https://www.cs.toronto.edu/~kriz/cifar.html). Il s'agit d'un problème multi-classes avec 10 étiquettes. Les données sont réparties de manière équilibrée entre les étiquettes. Les étiquettes sont les suivantes :
 ```
 class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
                'dog', 'frog', 'horse', 'ship', 'truck']
@@ -121,7 +120,7 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 ```
 
-**Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Vous utilisrez Adam, fixerez le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évalution sur la base de test. Voici l'architecture :**
+**Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Utiliser l'algorithme Adam, fixer le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évalution sur la base de test. Voici l'architecture :**
 
 ```
 couche CNN_1 : 256 filtres avec stride=(1,1) et padding='same'
@@ -134,7 +133,7 @@ et
 couche FC cachée : 64 neurones
 couche de sortie : 10 neurones
 ```
-**Question : en analysant les courbes que constatez-vous ?**
+**Question : en analysant les courbes d'apprentissage que constatez-vous ?**
 
 Pour remédier à ce problème plusieurs solutions existent dont
 1. l augmentation du nombre de données (data augmentation)
@@ -147,8 +146,9 @@ Nous le ferons après chaque couche de pooling. La valeur passée à la fonction
 de paramètres qui n'est pas mise à jour pendant l'entraînement. Dans notre exemple, 25% des paramètres ne sont
 pas mis à jour. Ces 25% sont tirés de manière aléatoire.
 
-**Question : définir cette structure de réseau et entraîner le sur 50 epochs. Comparer les courbes d'apprentissage avec les courbes obtenues 
+**Question : définir cette structure de réseau et entraîner le réseau sur 50 epochs. Comparer les courbes d'apprentissage de cette expérimentation avec les courbes obtenues 
 sans __dropout__**
+
 
 
 
