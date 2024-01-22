@@ -136,9 +136,20 @@ couche de sortie : 10 neurones
 ```
 **Question : en analysant les courbes que constatez-vous ?**
 
-Nous allons tenter de remédier à ce problème des deux manières suivantes :
-1. en augmentant le nombre de données (data augmentation)
-2. en ajoutant des couches de __dropout__
+Pour remédier à ce problème plusieurs solutions existent dont
+1. l augmentation du nombre de données (data augmentation)
+2. l'ajout de couches de __dropout__
+3. la réduction de la complexité du réseau
+4. etc.
+
+Nous allons tester l'ajout de couches de __dropout__ par ```model.add(layers.Dropout(0.25))```
+Nous le ferons après chaque couche de pooling. La valeur passée à la fonction Dropout() est la proportion
+de paramètres qui n'est pas mise à jour pendant l'entraînement. Dans notre exemple, 25% des paramètres ne sont
+pas mis à jour. Ces 25% sont tirés de manière aléatoire.
+
+**Question : définir cette structure de réseau et entraîner le sur 50 epochs. Comparer les courbes d'apprentissage avec les courbes obtenues 
+sans __dropout__**
+
 
 
 
