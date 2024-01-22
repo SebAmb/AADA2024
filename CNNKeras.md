@@ -122,7 +122,7 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 ## Définition, entraînement et évaluation
 
-**Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Utiliser l'algorithme Adam, fixer le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évalution sur la base de test. Voici l'architecture :**
+**Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Utiliser l'algorithme Adam, fixer le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évaluation sur la base de test. Voici l'architecture :**
 
 ```
 couche CNN_1 : 256 filtres avec stride=(1,1) et padding='same'
@@ -135,7 +135,9 @@ et
 couche FC cachée : 64 neurones
 couche de sortie : 10 neurones
 ```
-**Question : en analysant les courbes d'apprentissage que constatez-vous ?**
+**Question : quelles constatations pouvions nous en tirer si les couches CNN utilise un padding='valid' ?**
+
+**Question : en analysant les courbes d'apprentissage que constatez-vous (dans le cas padding='same') ?**
 
 Pour remédier à ce problème plusieurs solutions existent dont
 1. l augmentation du nombre de données (data augmentation)
