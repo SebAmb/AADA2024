@@ -120,6 +120,8 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 ```
 
+## Définition, entraînement et évaluation
+
 **Question : définir, entraîner, tracer les courbes et évaluer l'architecture convolutive suivante. Utiliser l'algorithme Adam, fixer le nombre d'epochs à 100 et la taille des batchs à 32 images. Garder à l'esprit que les images sont RGB donc certaines parties du code précédent devront être modifiées en conséquence. Vous mènerez l'évalution sur la base de test. Voici l'architecture :**
 
 ```
@@ -149,8 +151,44 @@ pas mis à jour. Ces 25% sont tirés de manière aléatoire.
 **Question : définir cette structure de réseau et entraîner le réseau sur 50 epochs. Comparer les courbes d'apprentissage de cette expérimentation avec les courbes obtenues 
 sans __dropout__**
 
+## Analyse des résultats
 
+Nous allons étudier plus précisément les résultats donnés par le réseau appris sur la base de test. Dans un premier temps, nous allons afficher les 10 premières erreurs de prédiction pour chacune des classes CIFAR-10. Une telle fonction est disponible dans la librairie pml_utils que nous devons télécharger préalablement.
+Voici les lignes de code (ici pour la classe "truck") :
 
+```
+import os
+if not os.path.isfile('pml_utils.py'):
+  !wget https://raw.githubusercontent.com/csc-training/intro-to-dl/master/day1/pml_utils.py
+
+from pml_utils import show_failures
+
+# prédiction sur la base de test
+predictions=model.predict(x_test)
+show_failures(predictions, y_test, x_test, trueclass=9)
+```
+
+**Question : appliquer cette fonction pour toutes les classes CIFAR-10.**
+
+Une autre manière d'appréhender la qualité du réseau et de vérifier la confusion que le réseau peut faire entre les classes. Pour cela nous construisons la matrice de confusion (confusion matrix). Dans cette matrice, chaque ligne correspond à une classe réelle et chaque colonne correspond à une classe estimée. Ainsi la cellule (ligne L, colonne C) contient le nombre d'éléments de la classe réelle L qui ont été estimés comme appartenant à la classe C. Cette matrice permet de voir ppour quelles classes le réseau est le plus ou le moins performant.
+Voici comment établir cette matrice :
+
+```
+from sklearn.metrics import confusion_matrix
+from numpy import argmax
+
+print('Confusion matrix (rows: true classes; columns: predicted classes):'); print()
+cm=confusion_matrix(y_test, argmax(predictions, axis=1), labels=list(range(10)))
+print(cm); print()
+
+print('Classification accuracy for each class:'); print()
+for i,j in enumerate(cm.diagonal()/cm.sum(axis=1)): print("%d: %.4f" % (i,j))
+
+```
+
+La diagonale regroupe les valeurs de précision pour chaque classe.
+
+**Question : quelles classes semblent êtres les plus difficiles à prédire ?**
 
 
 
