@@ -23,6 +23,27 @@ requises pour développer votre script.
 
 ### Etape 1 : Définition du modèle VGG-16
 
-**Question : à partir du schéma précédent, définir le modèle VGG-16 à l'aide des instructions Keras dont vous avez désormais connaissance.**
+A partir du schéma de l'architcture VGG-16 ...
+
+**Question : définir le modèle VGG-16 de référence à l'aide des instructions Keras dont vous avez désormais connaissance.**
+
+Cette défintion sera le modèle de référence i.e. le modèle que nous ferons évoluer afin d'atteindre une défintion optimale.
+
+**Question : charger les images de la base d'image CIFAR-100 et créer un sous-ensemble de validation de 20% de la base de training.**
+
+
+**Question : lancer l'apprentissage du réseau. Choisissez l'une des fonctions de loss que nous avons utiliser jusqu'à maintenant
+et modifier les labels en conséquence. Pour cette question, nous testerons les optimizers Adam et SGD. Nous fixerons le learning_rate=0.1,
+un batch_size=64 et un nombre d'epoch=10. Pour ces deux optimizers, comparer les valeurs obtenues en loss, accuracy, val_loss et val_accuracy.**
+
+Nous allons maintenant modifier l'architecture du réseau en deux temps. Tout d'abord nous allons ajouter des couche de BatchNormalization
+avec la fonction ```model.add(BatchNormalization())```. Cette fonction permet de normaliser les valeurs fournies par la fonction d'activation 
+sur l'ensemble d'un batch. 
+
+**Question : ajouter une couche de BatchNormalization après chaque couche de convolution et relancer l'apprentissage pour les deux optimizers.
+Quels constats pouvons nous faire en comparant à nouveau les valuers de loss, d'accuracy, de val_loss et de val_accuracy ?**
+
+
+
 
 
