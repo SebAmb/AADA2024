@@ -6,13 +6,13 @@ Un algorithme de segmentation permet de détecter chaque objet contenu dans une 
 
 A titre d'illustration, les deux images suivantes représentent une image couleur acquise dans un environnement routier et le mask des pixels correspondant. Dans ce mask les pixels jaune appartiennent à la classe "signalisation verticale", les pixels vert appartiennent à la végétation.
 
-![Image acquise dans un environnement routier](images/imageroute.png)
+![Image acquise dans un environnement routier](imageroute.png)
 
-![Illustration d'une segmentation](images/imagerouteseg.png)
+![Illustration d'une segmentation](imagerouteseg.png)
 
 Le réseau U-net est défini par l'architecture suivante :
 
-![u-net-architecture](images/u-net-architecture.png)
+![u-net-architecture](u-net-architecture.png)
 
 Dans cette architecture, l'entrée du réseau est à gauche et la sortie à droite. Ainsi en présentant (en mode test) une image à l'entrée du réseau, nous obtenons en sortie plusieurs masks de même résolution que l'image d'entrée (un mask par objet à détecter). L'ensemble des poids est estimé en présentant un batch d'images en entrée du réseau, en imposant la sortie (i.e. les masks des objets à détecter) et en appliquant une méthode d'optimisation (ADAM par exemple).
 
