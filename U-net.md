@@ -21,19 +21,12 @@ L'image d'entrée peut etre codée en niveau de gris ou en couleur selon le beso
 Le réseau se compose donc de deux parties. La première partie (située a gauche) définie par une succession de couches de convolution, d'activation et de max pooling comme vous l'avez déjà pratiqué lors des séances de TP.
 Nous travaillerons sur des images de faibles résolutions. Par conséquent, contrairement à ce qui est indiqué sur l'architecture précédente qui est définie pour les images d'entrée de résolution  572x572, dans notre cas d'usage, les couches successives feront appel respectivement aux nombres de filtres suivants : 16, 16, 32, 32, 64, 64, 128 et 128. Nous obtenons donc 8 feature maps.
 
-La seconde partie du réseau se compose d'une succession de couche de **déconvolution**, de convolution, de **concaténation** et d'activation. Aucune couche de max pooling ne compose la seconde partie du réseau. Deux nouveautés apparaissent ici. La couche de **déconvolution** et la couche de **concaténation**.
+La seconde partie du réseau se compose d'une succession de couche de **UpSampling2D**, de convolution, de **concaténation** et d'activation. Aucune couche de max pooling ne compose la seconde partie du réseau. Deux nouveautés apparaissent ici. La couche de **UpSampling2D** et la couche de **concaténation**.
 Puisqu'il s'agit d'estimer une image de résolution spatiale identique à l'image d'entrée, il est donc nécessaire d'appliquer les traitements capable d'augmenter la taille des volumes de données (l'inverse des max pooling). Pour cela, nous allons utiliser ces deux nouvelles fonctions. 
 
-La déconvolution est indiquée par la flèche rouge. Elle exploite la fonction ```tf.nn.conv2d_transpose()```
-Pour réaliser ce réseau, la fonction vous est donnée. Elle se nomme ```deconvolution``` et est appelée avec les paramètres suivants  ```d2=deconvolution(result, 3, 64, 2, ph_is_training)```. 
+Le UpSampling2D est indiquée par la flèche rouge. Elle exploite la fonction ```UpSampling2D()``` de Keras
+Pour réaliser ce réseau, la fonction vous est donnée. Elle est appelée ainsi ```d2=pSampling2D(size = (2,2)```. 
 
-```
-result : représente la couche que nous cherchons à déconvoluer
-3 : est la taille du noyau
-64 : est le nombre de noyaux
-2 : est le valeur du stride
-ph_is_training : est la variable qui indiquera si nous sommes en apprentissage ou en test.
-```
 Pour obtenir chaque couche, la taille des noyaux de déconvolution est de 3 et leur nombre sera (dans l'ordre d'application) : 64, 64, 32
 
 Pour obtenir chaque couche, la taille des noyaux de convolutions est de 3 et leur nombre sera (dans l'ordre d'application) : 64, 64, 32, 32, 16, 16
@@ -44,4 +37,4 @@ Attention : après la déconvolution, nous devrez appliquer une couche d'activat
 
 Votre travail est d'appeler la fonction déconvolution de la bonne manière i.e. aux bons endroits de l'architecture afin de construire le réseau conformément à ce qui est indiqué dans le schéma de l'architecture précédent.
 
-La fonction de concaténation ```result=tf.concat((d2, c2), axis=3) ``` est appliquée afin d'assembler les volumes de données de la partie gauche du réseau et de la partie droite. Les couches de la partie gauche du réseau sont celles situées juste avant le max-pooling. Les couches de la partie droite sont celles située après l'appel de la fonction de déconvolution. Les deux couches concaténées requièrent les mêmes résolutions spatiales. Ainsi, cette opération s'effectue selon la troisième composante i.e. la profondeur ```axis=3``` (le nombre de filtres).
+La fonction de concaténation ```oncatenate([layer1,layes2], axis = 3) ``` est appliquée afin d'assembler les volumes de données de la partie gauche du réseau et de la partie droite. Les couches de la partie gauche du réseau sont celles situées juste avant le max-pooling. Les couches de la partie droite sont celles située après l'appel de la fonction de déconvolution. Les deux couches concaténées requièrent les mêmes résolutions spatiales. Ainsi, cette opération s'effectue selon la troisième composante i.e. la profondeur ```axis=3``` (le nombre de filtres).
