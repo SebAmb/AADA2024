@@ -10,6 +10,10 @@ A titre d'illustration, les deux images suivantes représentent une image couleu
 
 ![Illustration d'une segmentation](imagerouteseg.png)
 
+Les labels à retrouver dans les images sont les suivants :
+
+![label](images/label_lyft-udacity-challenge.png)
+
 Le réseau U-net est défini par l'architecture suivante :
 
 ![u-net-architecture](u-net-architecture.png)
@@ -38,3 +42,42 @@ Attention : après la déconvolution, nous devrez appliquer une couche d'activat
 Votre travail est d'appeler la fonction déconvolution de la bonne manière i.e. aux bons endroits de l'architecture afin de construire le réseau conformément à ce qui est indiqué dans le schéma de l'architecture précédent.
 
 La fonction de concaténation ```oncatenate([layer1,layes2], axis = 3) ``` est appliquée afin d'assembler les volumes de données de la partie gauche du réseau et de la partie droite. Les couches de la partie gauche du réseau sont celles situées juste avant le max-pooling. Les couches de la partie droite sont celles située après l'appel de la fonction de déconvolution. Les deux couches concaténées requièrent les mêmes résolutions spatiales. Ainsi, cette opération s'effectue selon la troisième composante i.e. la profondeur ```axis=3``` (le nombre de filtres).
+
+
+## Lecture et conditionnement de données
+
+Voici le script qui vous permet de créer les variables contenant les images qui nous permettront ensuite de lancer l'entraînement du réseau.
+
+```
+import cv2
+import os
+import tensorflow.compat.v1 as tf 
+tf.disable_v2_behavior()
+import numpy as np
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plot
+ 
+from google.colab import drive
+drive.mount('/content/drive')
+
+nbr_mask=13
+width=160
+height=120
+ 
+with open('/content/drive/My Drive/dataset/lyft-udacity-challenge/tabImageMask_all.npy','rb') as f:
+  tab_img = np.load(f)
+  tab_mask = np.load(f)
+ 
+tab_img=np.array(tab_img)
+tab_mask=np.array(tab_mask)
+ 
+train_images, test_images, train_labels, test_labels=train_test_split(tab_img, tab_mask, test_size=.1)
+
+print(tab_mask.shape)
+print(tab_img.shape)
+# Affichage de la classe 2 de l'image 0
+plot.imshow(tab_mask[0][:,:,1])
+
+```
+
+
