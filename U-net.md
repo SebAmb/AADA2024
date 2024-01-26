@@ -51,8 +51,6 @@ Voici le script qui vous permet de créer les variables contenant les images qui
 ```
 import cv2
 import os
-import tensorflow.compat.v1 as tf 
-tf.disable_v2_behavior()
 import numpy as np
 from sklearn.model_selection import train_test_split
 import matplotlib.pyplot as plot
